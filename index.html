@@ -615,8 +615,8 @@
                 })
             })
 
-            this.Head_banner.addEventListener("touchstart", (e) => this.dragStart(e), { passive: false });
-            this.Head_banner.addEventListener("touchmove", (e) => this.drag(e), { passive: false });
+            this.Head_banner.addEventListener("touchstart", (e) => this.dragStart(e), { passive: true });
+            this.Head_banner.addEventListener("touchmove", (e) => this.drag(e), { passive: true });
             this.Head_banner.addEventListener("touchend", (e) => this.dragEnd(e));
         }
 
@@ -655,7 +655,6 @@
 
             drag: function (e) {
                 if (!this.Isdragging) return;
-                e.preventDefault();
 
                 const currentPageX = e.touches ? e.touches[0].pageX : this.startX;
                 const diffX = currentPageX - this.startX;
@@ -665,7 +664,7 @@
 
                 if (Math.abs(diffY) > Math.abs(diffX)) {
                     this.Isdragging = false;
-                    this.Issliding = true;
+                    return;
                 }
     
                 if (Math.abs(diffX) > 5) {
@@ -1054,6 +1053,7 @@
 
 
 </html>
+
 
 
 
