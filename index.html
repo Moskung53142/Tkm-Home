@@ -616,7 +616,7 @@
             })
 
             this.Head_banner.addEventListener("touchstart", (e) => this.dragStart(e), { passive: true });
-            this.Head_banner.addEventListener("touchmove", (e) => this.drag(e), { passive: true });
+            this.Head_banner.addEventListener("touchmove", (e) => this.drag(e), { passive: false });
             this.Head_banner.addEventListener("touchend", (e) => this.dragEnd(e));
         }
 
@@ -1054,6 +1054,7 @@
 
 
 </html>
+
 
 
 
