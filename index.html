@@ -87,7 +87,7 @@
 
         <!-- Head_Banners -->
         <section>
-            <div class="relative mt-14 w-full min-h-[50vh] xl:min-h-[65vh]">
+            <div class="relative mt-14 w-full min-h-[50vh] sm:min-h-[32rem] lg:min-h-[75vh] xl:min-h-[65vh]">
                 <div class="Head_Banner absolute top-0 w-full h-full border-b-2 border-b-black z-10 overflow-hidden">
                     <div class="Head_Banner_List absolute flex justify-center w-full h-full -z-40">
                         <div id="head_pic1" class="Head_side_Banner absolute h-full">
@@ -495,12 +495,22 @@
 
                 <div class="flex justify-center mt-32 md:mt-8">
                     <div class="navigation-controls flex items-center md:space-x-4">
-                        <button id="catLeft" class="nav-arrow" aria-label="Previous Category">&#9664;</button>
+                        <button id="catLeft" class="nav-arrow place-items-center" aria-label="Previous Category">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class = "w-7 h-7 object-cover">
+                                <path fill="#fff"
+                                    d="m4.431 12.822l13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645" />
+                            </svg>
+                        </button>
                         <div class="dot-navigation flex space-x-2">
                             <span id="dot1" class="dot active"></span>
                             <span id="dot2" class="dot"></span>
                         </div>
-                        <button id="catRight" class="nav-arrow" aria-label="Next Category">&#9654;</button>
+                        <button id="catRight" class="nav-arrow place-items-center" aria-label="Next Category">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class = "w-7 h-7 object-cover">
+                                <path fill="#fff"
+                                    d="M5.536 21.886a1 1 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -587,7 +597,7 @@
 
             this.HeadBanner_swipeTime;
 
-            this.startX;
+            this.startX, this.startY;
             this.Isdragging = false;
             this.Issliding = false;
 
@@ -637,6 +647,7 @@
 
             dragStart: function (e) {
                 this.startX = e.touches[0].pageX;
+                this.startY = e.touches[0].pageY;
                 if (!this.Issliding) {
                     this.Isdragging = true;
                 }
@@ -649,6 +660,14 @@
                 const currentPageX = e.touches ? e.touches[0].pageX : this.startX;
                 const diffX = currentPageX - this.startX;
 
+                const currentPageY = e.touches ? e.touches[0].pageY : this.startY;
+                const diffY = currentPageY - this.startY;
+
+                if (Math.abs(diffY) > Math.abs(diffX)) {
+                    this.Isdragging = false;
+                    return;
+                }
+    
                 if (Math.abs(diffX) > 5) {
                     if (diffX > 0) {
                         this.swipeBanner("left");
@@ -1035,5 +1054,6 @@
 
 
 </html>
+
 
 
